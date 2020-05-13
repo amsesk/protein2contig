@@ -16,12 +16,6 @@ fn main() -> io::Result<()> {
             .about("Path to GFF3.")
             .takes_value(true)
             .required(true))
-        .arg(Arg::with_name("fasta")
-            .long("fasta")
-            .value_name("FILE")
-            .about("Path to assembly fasta.")
-            .takes_value(true)
-            .required(true))
         .arg(Arg::with_name("headers")
             .long("headers")
             .value_name("FILE")
@@ -31,7 +25,6 @@ fn main() -> io::Result<()> {
         .get_matches();
 
     let gff3_path = matches.value_of("gff3").unwrap();
-    let _fasta_path = matches.value_of("fasta").unwrap();
     let headers_path = matches.value_of("headers").unwrap();
 
     let gff3 = bio::io::gff::Reader::from_file(&gff3_path, bio::io::gff::GffType::GFF3).unwrap();
