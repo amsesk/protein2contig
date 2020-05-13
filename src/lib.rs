@@ -1,10 +1,7 @@
 extern crate bio;
 use std::io;
 
-pub fn protein_to_contig<R>(
-    mut phead: Vec<String>,
-    mut gff3: bio::io::gff::Reader<R>,
-) -> Result<String, &'static str>
+pub fn protein_to_contig<R>(mut phead: Vec<String>, mut gff3: bio::io::gff::Reader<R>)
 where
     R: io::Read,
 {
@@ -24,5 +21,4 @@ where
             }
         }
     }
-    Err("No match")
 }
