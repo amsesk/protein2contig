@@ -6,7 +6,7 @@ where
     R: io::Read,
 {
     for record in gff3.records().map(|r| r.unwrap()) {
-        if let Some(parent) = record.attributes().get("Parent") {
+        if let Some(parent) = record.attributes().get("ID") {
             if phead.iter().any(|h| h == parent) {
                 let mut rm = 0;
                 for (i, h) in phead.iter().enumerate() {
