@@ -7,11 +7,10 @@ where
 {
     for record in gff3.records().map(|r| r.unwrap()) {
         if let Some(parent) = record.attributes().get("Parent") {
-            let spl: Vec<&str> = parent.split('_').collect();
-            if phead.iter().any(|h| *h == spl[1]) {
+            if phead.iter().any(|h| h == parent) {
                 let mut rm = 0;
                 for (i, h) in phead.iter().enumerate() {
-                    if *h == spl[1] {
+                    if h == parent {
                         rm = i;
                         println!("{}\t{}", h, record.seqname());
                     }
@@ -20,5 +19,13 @@ where
                 phead.remove(rm);
             }
         }
+    }
+
+    if !phead.is_empty() {
+        println!(
+            "Some headers ({} of them) did not have a match in the supplied GFF3:",
+            phead.len()
+        );
+        println!("{}", phead.join("\n"));
     }
 }

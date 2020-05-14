@@ -31,11 +31,9 @@ fn main() -> io::Result<()> {
 
     let headers = File::open(headers_path)?;
     let headers = BufReader::new(headers);
-    let headers: Vec<String> = headers
-        .lines()
-        .map(|l| l.unwrap())
-        .map(|l| l.split('_').collect::<Vec<&str>>()[1].to_owned())
-        .collect();
-    let _pairs = lib::protein_to_contig(headers, gff3);
+    let headers: Vec<String> = headers.lines().map(|l| l.unwrap()).collect();
+
+    lib::protein_to_contig(headers, gff3);
+
     Ok(())
 }
